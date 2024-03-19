@@ -1,0 +1,12 @@
+nav{
+    width: 100vw;
+}
+
+.guia {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    margin-left: 5vw;
+    margin-right: 5vw;
+}

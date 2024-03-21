@@ -32,3 +32,29 @@ class PalavraTest(TestCase):
         ]
         
         self.assertEqual(p.checkAnswer(entrada), expectedReturn)
+        
+    def test_return_quantity(self):
+        p = Palavra('teste')
+        entrada = 'tetsa'
+        expectedReturn = [
+            tipoResposta.existePosCorreta,
+            tipoResposta.existePosCorreta,
+            tipoResposta.existePosErrada,
+            tipoResposta.existePosErrada,
+            tipoResposta.naoExiste,
+        ]
+        self.assertEqual(p.checkAnswer(entrada), expectedReturn)
+        
+    def test_char_quantity_validation(self):
+        p = Palavra('balo')
+        entrada = 'bobo'
+        # expectedReturn = [
+        #     tipoResposta.existePosCorreta,
+        #     tipoResposta.naoExiste,
+        #     tipoResposta.naoExiste,
+        #     tipoResposta.existePosCorreta
+        # ]
+        
+        ### Perguntar pro Étttore ###
+        
+        

@@ -1,6 +1,7 @@
 from unittest import TestCase
-from palavras import Palavra
+from palavras import Palavra, Jogo
 from tiposResposta import tipoResposta
+from estadoJogo import estadoJogo
 
 class PalavraTest(TestCase):
     
@@ -45,16 +46,35 @@ class PalavraTest(TestCase):
         ]
         self.assertEqual(p.checkAnswer(entrada), expectedReturn)
         
-    def test_char_quantity_validation(self):
-        p = Palavra('balo')
-        entrada = 'bobo'
-        # expectedReturn = [
-        #     tipoResposta.existePosCorreta,
-        #     tipoResposta.naoExiste,
-        #     tipoResposta.naoExiste,
-        #     tipoResposta.existePosCorreta
-        # ]
+    # def test_char_quantity_validation(self):
+    #     p = Palavra('balo')
+    #     #entrada = 'bobo'
+    #     # expectedReturn = [
+    #     #     tipoResposta.existePosCorreta,
+    #     #     tipoResposta.naoExiste,
+    #     #     tipoResposta.naoExiste,
+    #     #     tipoResposta.existePosCorreta
+    #     # ]
         
-        ### Perguntar pro Étttore ###
+    #     ### Perguntar pro Étttore ###
+    
+    def test_word_lenght(self):
+        p = Palavra('teste')
+        entrada = 'amar'
+        expectedReturn = tipoResposta.tentativaInvalida
+        self.assertEqual(p.checkAnswer(entrada), expectedReturn)
         
+    def test_run_out_attempts(self):
+        p1 = Palavra('test')
+        gameWords = [p1]
+        numberAttempts = 3
+        game = Jogo(gameWords, numberAttempts)
+
+        entrada = 'tesl'
+        
+        game.enterAttempt(entrada)
+        game.enterAttempt(entrada)
+        game.enterAttempt(entrada)
+        
+        self.assertEqual(game.getState(), estadoJogo.perdido)
         

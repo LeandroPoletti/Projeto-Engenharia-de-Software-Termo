@@ -78,3 +78,11 @@ class PalavraTest(TestCase):
         
         self.assertEqual(game.getState(), estadoJogo.perdido)
         
+    def test_game_won(self):
+        p1 = Palavra("teste")
+        gameWords = [p1]
+        game = Jogo(gameWords, 1)
+        game.enterAttempt("teste")
+        
+        self.assertEqual(game.getState(), estadoJogo.vencido)
+        

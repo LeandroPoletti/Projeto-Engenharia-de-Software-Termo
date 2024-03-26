@@ -18,16 +18,25 @@ class Palavra():
             returnList = []
             for i in range(len(entrada)):
                 returnList.append(self._check(entrada[i], i))
-                
-            resultado = set(returnList)
             
-            if len(resultado) == 1 and resultado == tipoResposta.existePosCorreta:
-                self.solved = True
+            self._trySolve(returnList)
             
             return returnList
         else:
             return tipoResposta.tentativaInvalida
     
+    def _trySolve(self, resultado: list):
+        resultado = set(resultado)
+        self.copia = resultado    
+        if len(resultado) == 1:
+            if tipoResposta.existePosCorreta in resultado:
+                correta = True
+            else:
+                correta = False
+            
+            if correta:
+                self.solved = True
+
     def _check(self, letra: str, index: int):
         if letra == self.listaResposta[index]:
             return tipoResposta.existePosCorreta
@@ -54,7 +63,7 @@ class Jogo():
             solved.append(p.getSolved())
         
         resumo = set(solved)
-        if len(resumo) == 1 and resumo == True:
+        if len(resumo) == 1 and True in resumo:
             self.state = estadoJogo.vencido
         elif self.tentativasRestantes == 0:
             self.state = estadoJogo.perdido

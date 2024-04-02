@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from tiposResposta import tipoResposta
 from estadoJogo import estadoJogo
+from typing import List
 @dataclass
 class Palavra():
     nome: str
@@ -68,8 +69,11 @@ class Jogo():
         elif self.tentativasRestantes == 0:
             self.state = estadoJogo.perdido
         
-    def getWordState(self, palavra) -> bool:
-        return palavra.getSolved()
+    def getWordState(self) -> List[bool]:
+        result = []
+        for p in self.listaPalavras:
+            result.append(p.getSolved())
+        return result
     
     def getState(self) -> estadoJogo:
         return self.state

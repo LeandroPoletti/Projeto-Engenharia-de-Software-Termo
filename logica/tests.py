@@ -86,3 +86,32 @@ class PalavraTest(TestCase):
         
         self.assertEqual(game.getState(), estadoJogo.vencido)
         
+    def test_check_multiple_words(self):
+        p1 = Palavra('Teste')
+        p2 = Palavra('Voar')
+        gameWords = [p1,p2]
+        game = Jogo(gameWords, 3)
+
+        expectedResult = [True, False]
+        expectedResult2 = [True, True]
+
+        expected = [expectedResult,expectedResult2]
+        game.enterAttempt('Teste')
+        result1 = game.getWordState()
+        
+        game.enterAttempt('Voar')
+        result2 = game.getWordState()
+
+        givenResults = [result1,result2]
+
+        self.assertEqual(givenResults, expected)
+        
+        p1 = Palavra('tela')
+        result = p1.checkAnswer('lela')
+        expectedResult = [tipoResposta.naoExiste,
+                          tipoResposta.existePosCorreta,
+                          tipoResposta.existePosCorreta,
+                          tipoResposta.existePosCorreta]
+        self.assertEqual(result,expectedResult)        
+
+        
